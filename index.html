@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0a18">
+  <title>IntelliStudy | Student Workspace</title>
+  <meta name="description" content="Your personal study planner, focus timer, and learning dashboard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+      <a href="#dashboard" class="brand" data-page="dashboard">
+        <span class="brand-icon">✦</span>
+        <span>
+          <strong>IntelliStudy</strong>
+          <small>YOUR LEARNING SPACE</small>
+        </span>
+      </a>
+
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-page="dashboard">
+          <span>▦</span> Dashboard
+        </button>
+        <button class="nav-link" data-page="tasks">
+          <span>☑</span> My Tasks <span class="nav-count" id="navTaskCount">0</span>
+        </button>
+        <button class="nav-link" data-page="planner">
+          <span>▦</span> Study Planner
+        </button>
+        <button class="nav-link" data-page="notes">
+          <span>▤</span> My Notes
+        </button>
+        <button class="nav-link" data-page="focus">
+          <span>◷</span> Focus Room
+        </button>
+        <button class="nav-link" data-page="progress">
+          <span>↗</span> My Progress
+        </button>
+      </nav>
+
+      <div class="nav-label learning-label">LEARNING</div>
+      <nav class="main-nav" aria-label="Learning navigation">
+        <button class="nav-link" data-page="subjects">
+          <span>▣</span> My Subjects
+        </button>
+        <button class="nav-link" data-page="assistant">
+          <span>✧</span> AI Study Assistant
+          <span class="ai-tag">AI</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="upgrade-card">
+          <div class="upgrade-icon">✦</div>
+          <strong>Your goals, your future.</strong>
+          <p>Small steps every day lead to big achievements.</p>
+          <button class="upgrade-button" data-page="planner">Plan my day ↗</button>
+        </div>
+
+        <div class="profile-mini">
+          <div class="avatar">S</div>
+          <div class="profile-info">
+            <strong id="sidebarName">Student</strong>
+            <small>Learning journey</small>
+          </div>
+          <button class="icon-button" id="editProfileBtn" title="Edit profile" aria-label="Edit profile">⚙</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu icon-button" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+
+        <div class="breadcrumb">
+          <span>Workspace</span><span class="breadcrumb-slash">/</span>
+          <strong id="breadcrumbTitle">Dashboard</strong>
+        </div>
+
+        <div class="topbar-actions">
+          <label class="search-box">
+            <span>⌕</span>
+            <input type="search" id="globalSearch" placeholder="Search tasks and notes..." aria-label="Search tasks and notes">
+            <kbd>⌘ K</kbd>
+          </label>
+          <button class="icon-button notification-button" id="notificationBtn" aria-label="Show daily summary" title="Daily summary">♧</button>
+          <button class="user-button" id="topProfileBtn">
+            <span class="avatar">S</span>
+            <span class="user-details"><strong id="topName">Student</strong><small>Student account</small></span>
+            <span>⌄</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+
+        <!-- DASHBOARD -->
+        <section class="page-section active" id="page-dashboard">
+          <div class="welcome-row">
+            <div>
+              <div class="eyebrow"><span class="live-dot"></span> YOUR PERSONAL LEARNING SPACE</div>
+              <h1 id="welcomeTitle">Let's make today count<span class="title-sparkle"> ✦</span></h1>
+              <p class="subtitle" id="welcomeSubtitle">A little progress every day adds up to big results.</p>
+            </div>
+            <div class="date-card">
+              <span class="date-icon">▦</span>
+              <div><small>TODAY</small><strong id="todayDate">Loading date...</strong></div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-content">
+              <span class="hero-badge">✦ YOUR DAILY MOTIVATION</span>
+              <h2>Dream big.<br>Study <span>smart.</span></h2>
+              <p>Make time for what matters. Your next achievement starts with the task in front of you.</p>
+              <button class="primary-button" data-page="planner">Plan your study day <span>→</span></button>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="orbit orbit-one"></div>
+              <div class="orbit orbit-two"></div>
+              <div class="hero-glow"></div>
+              <div class="book-illustration">
+                <span class="book-star">✦</span>
+                <span class="book-lines"></span>
+                <span class="book-lines short"></span>
+              </div>
+              <div class="floating-chip chip-one">✦ Stay curious</div>
+              <div class="floating-chip chip-two">↗ Keep growing</div>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div><h2>Your overview</h2><p>A snapshot of your learning journey.</p></div>
+            <button class="text-button" data-page="progress">View progress ↗</button>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-top"><span>Tasks completed</span><span class="stat-icon purple-icon">✓</span></div>
+              <div class="stat-value" id="completedStat">0</div>
+              <div class="stat-foot"><span class="stat-accent">Keep going!</span><span>completed tasks</span></div>
+              <div class="mini-track"><span id="completedTrack"></span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span>Tasks remaining</span><span class="stat-icon blue-icon">◷</span></div>
+              <div class="stat-value" id="pendingStat">0</div>
+              <div class="stat-foot"><span>On your task list</span></div>
+              <div class="mini-track blue-track"><span id="pendingTrack"></span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span>Focus minutes</span><span class="stat-icon pink-icon">✦</span></div>
+              <div class="stat-value"><span id="focusStat">0</span><small> min</small></div>
+              <div class="stat-foot"><span class="stat-accent">Every minute counts</span></div>
+              <div class="mini-track pink-track"><span id="focusTrack"></span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span>Study streak</span><span class="stat-icon orange-icon">♨</span></div>
+              <div class="stat-value"><span id="streakStat">0</span><small> days</small></div>
+              <div class="stat-foot"><span>Build a consistent habit</span></div>
+              <div class="mini-track orange-track"><span id="streakTrack"></span></div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel tasks-panel">
+              <div class="panel-heading">
+                <div><h3>Today's tasks</h3><p>One step at a time.</p></div>
+                <button class="text-button" data-page="tasks">View all →</button>
+              </div>
+              <div class="task-list" id="dashboardTaskList"></div>
+              <button class="add-inline-button" id="dashboardAddTask">＋ Add a new task</button>
+            </section>
+
+            <section class="panel progress-panel">
+              <div class="panel-heading">
+                <div><h3>Daily goal</h3><p>Make time for learning.</p></div>
+                <span class="panel-symbol">✧</span>
+              </div>
+              <div class="goal-circle" id="goalCircle">
+                <div><strong id="goalPercent">0%</strong><small>completed</small></div>
+              </div>
+              <p class="goal-caption" id="goalCaption">Your next step starts here.</p>
+              <div class="goal-detail"><span>Completed tasks</span><strong id="goalCompleted">0 / 0</strong></div>
+              <button class="secondary-button full-button" data-page="tasks">Work on your goals →</button>
+            </section>
+
+            <section class="panel subjects-panel">
+              <div class="panel-heading">
+                <div><h3>Explore subjects</h3><p>Make progress in every area.</p></div>
+                <button class="text-button" data-page="subjects">View all →</button>
+              </div>
+              <div class="subject-list" id="dashboardSubjects"></div>
+            </section>
+
+            <section class="panel focus-preview">
+              <div class="panel-heading">
+                <div><h3>Focus room</h3><p>Time to concentrate.</p></div>
+                <span class="panel-symbol">◷</span>
+              </div>
+              <div class="focus-preview-inner">
+                <div class="focus-ring-small"><span>25<small>MIN</small></span></div>
+                <div><strong>Your next focus session</strong><p>One task. One goal. No distractions.</p></div>
+              </div>
+              <button class="primary-button full-button" data-page="focus">Start focusing →</button>
+            </section>
+          </div>
+
+          <footer class="app-footer">Made for your next big achievement <span>✦</span> IntelliStudy</footer>
+        </section>
+
+        <!-- TASKS -->
+        <section class="page-section" id="page-tasks">
+          <div class="page-title-row">
+            <div><div class="eyebrow">STAY ORGANIZED</div><h1>My Tasks</h1><p class="subtitle">Turn your plans into progress.</p></div>
+            <button class="primary-button" id="addTaskBtn">＋ Add task</button>
+          </div>
+          <div class="filter-row">
+            <div class="filter-tabs" id="taskFilters">
+              <button class="filter-tab active" data-filter="all">All tasks</button>
+              <button class="filter-tab" data-filter="pending">Pending</button>
+              <button class="filter-tab" data-filter="completed">Completed</button>
+            </div>
+            <select id="subjectFilter" aria-label="Filter by subject">
+              <option value="all">All subjects</option>
+              <option>Programming</option><option>Mathematics</option>
+              <option>Data Structures</option><option>Database Systems</option>
+              <option>Computer Networks</option><option>Other</option>
+            </select>
+          </div>
+          <div class="panel full-panel"><div class="task-list large-task-list" id="allTaskList"></div></div>
+        </section>
+
+        <!-- PLANNER -->
+        <section class="page-section" id="page-planner">
+          <div class="page-title-row"><div><div class="eyebrow">MAKE A PLAN</div><h1>Study Planner</h1><p class="subtitle">Organize your day, one session at a time.</p></div></div>
+          <div class="planner-layout">
+            <section class="panel">
+              <div class="panel-heading"><div><h3>Plan a study session</h3><p>Add your next learning goal.</p></div></div>
+              <form id="plannerForm" class="form-stack">
+                <label>Session title<input name="title" required maxlength="100" placeholder="e.g. Revise linked lists"></label>
+                <div class="form-row">
+                  <label>Subject<select name="subject"><option>Programming</option><option>Mathematics</option><option>Data Structures</option><option>Database Systems</option><option>Computer Networks</option><option>Other</option></select></label>
+                  <label>Study date<input type="date" name="date" id="plannerDate" required></label>
+                </div>
+                <div class="form-row">
+                  <label>Start time<input type="time" name="time" value="18:00" required></label>
+                  <label>Duration<select name="duration"><option value="25">25 minutes</option><option value="45">45 minutes</option><option value="60">1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select></label>
+                </div>
+                <button class="primary-button" type="submit">＋ Add to my plan</button>
+              </form>
+            </section>
+            <section class="panel">
+              <div class="panel-heading"><div><h3>Planned sessions</h3><p>Your upcoming study schedule.</p></div></div>
+              <div id="plannerList" class="planner-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- NOTES -->
+        <section class="page-section" id="page-notes">
+          <div class="page-title-row"><div><div class="eyebrow">CAPTURE YOUR IDEAS</div><h1>My Notes</h1><p class="subtitle">Keep important ideas in one place.</p></div><button class="primary-button" id="newNoteBtn">＋ New note</button></div>
+          <form id="noteForm" class="panel note-editor hidden">
+            <label>Note title<input name="title" required maxlength="100" placeholder="Give your note a title"></label>
+            <label>Subject<select name="subject"><option>Programming</option><option>Mathematics</option><option>Data Structures</option><option>Database Systems</option><option>Computer Networks</option><option>Other</option></select></label>
+            <label>Your notes<textarea name="content" required maxlength="10000" rows="6" placeholder="Write down what you want to remember..."></textarea></label>
+            <div class="form-actions"><button class="secondary-button" type="button" id="cancelNoteBtn">Cancel</button><button class="primary-button" type="submit">Save note</button></div>
+          </form>
+          <div class="notes-grid" id="notesGrid"></div>
+        </section>
+
+        <!-- FOCUS -->
+        <section class="page-section" id="page-focus">
+          <div class="page-title-row"><div><div class="eyebrow">FIND YOUR FLOW</div><h1>Focus Room</h1><p class="subtitle">Give one task your full attention.</p></div></div>
+          <div class="focus-page-layout">
+            <section class="panel timer-panel">
+              <span class="hero-badge">✦ DEEP WORK SESSION</span>
+              <h2 id="timerModeTitle">Time to focus</h2>
+              <p class="subtitle">Silence distractions. Focus on what matters.</p>
+              <div class="timer-ring" id="timerRing"><div class="timer-inner"><strong id="timerDisplay">25:00</strong><small id="timerModeLabel">FOCUS SESSION</small></div></div>
+              <div class="timer-presets">
+                <button class="preset-button active" data-minutes="25">Focus · 25m</button>
+                <button class="preset-button" data-minutes="5" data-mode="break">Short break · 5m</button>
+                <button class="preset-button" data-minutes="15" data-mode="break">Long break · 15m</button>
+              </div>
+              <div class="timer-controls"><button class="primary-button" id="timerStartBtn">▶ Start focus</button><button class="secondary-button" id="timerResetBtn">↺ Reset</button></div>
+              <p class="timer-message" id="timerMessage">Your focus session is ready when you are.</p>
+            </section>
+            <section class="panel focus-side-panel">
+              <h3>Focus tips</h3>
+              <div class="tip-item"><span>01</span><div><strong>Choose one task</strong><p>Decide what you want to finish before starting.</p></div></div>
+              <div class="tip-item"><span>02</span><div><strong>Clear distractions</strong><p>Keep your phone away and close unrelated tabs.</p></div></div>
+              <div class="tip-item"><span>03</span><div><strong>Take a real break</strong><p>Rest between sessions to refresh your attention.</p></div></div>
+              <div class="focus-minutes-card"><span>Today's recorded focus</span><strong><span id="focusPageStat">0</span> minutes</strong></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section class="page-section" id="page-progress">
+          <div class="page-title-row"><div><div class="eyebrow">YOUR LEARNING JOURNEY</div><h1>My Progress</h1><p class="subtitle">Celebrate small wins and keep improving.</p></div></div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Tasks completed</span><span class="stat-icon purple-icon">✓</span></div><div class="stat-value" id="progressCompleted">0</div><div class="stat-foot">All-time completed tasks</div></article>
+            <article class="stat-card"><div class="stat-top"><span>Focus time</span><span class="stat-icon pink-icon">✦</span></div><div class="stat-value"><span id="progressFocus">0</span><small> min</small></div><div class="stat-foot">Recorded focus sessions</div></article>
+            <article class="stat-card"><div class="stat-top"><span>Notes saved</span><span class="stat-icon blue-icon">▤</span></div><div class="stat-value" id="progressNotes">0</div><div class="stat-foot">Ideas captured</div></article>
+            <article class="stat-card"><div class="stat-top"><span>Study sessions</span><span class="stat-icon orange-icon">◷</span></div><div class="stat-value" id="progressSessions">0</div><div class="stat-foot">Completed focus sessions</div></article>
+          </div>
+          <section class="panel progress-summary">
+            <div class="panel-heading"><div><h3>Your productivity summary</h3><p>Based on your activity in IntelliStudy.</p></div></div>
+            <div class="summary-bar"><span>Tasks completed</span><strong id="progressTaskRatio">0%</strong></div>
+            <div class="wide-track"><span id="progressTaskBar"></span></div>
+            <p class="summary-message" id="progressMessage">Start with one task and build your momentum.</p>
+          </section>
+          <section class="panel achievements-panel">
+            <div class="panel-heading"><div><h3>Your milestones</h3><p>Earn milestones by showing up and making progress.</p></div></div>
+            <div class="achievement-grid" id="achievementGrid"></div>
+          </section>
+        </section>
+
+        <!-- SUBJECTS -->
+        <section class="page-section" id="page-subjects">
+          <div class="page-title-row"><div><div class="eyebrow">LEARN SOMETHING EVERY DAY</div><h1>My Subjects</h1><p class="subtitle">Your subjects, your goals, your progress.</p></div></div>
+          <div class="subjects-grid" id="allSubjectsGrid"></div>
+        </section>
+
+        <!-- ASSISTANT -->
+        <section class="page-section" id="page-assistant">
+          <div class="page-title-row"><div><div class="eyebrow">YOUR STUDY COMPANION</div><h1>AI Study Assistant</h1><p class="subtitle">Get help organizing your learning.</p></div><span class="ai-tag large-ai-tag">AI-READY</span></div>
+          <div class="assistant-layout">
+            <section class="panel assistant-panel">
+              <div class="assistant-welcome"><div class="assistant-symbol">✧</div><h2>What would you like to study?</h2><p>Choose a study task to get started. This first version uses built-in guidance; real AI answers can be connected later.</p></div>
+              <div class="suggestion-grid">
+                <button class="suggestion-card" data-prompt="plan"><span>▦</span><strong>Create a study plan</strong><small>Organize your next study session</small></button>
+                <button class="suggestion-card" data-prompt="revise"><span>✎</span><strong>Help me revise</strong><small>Build a quick revision checklist</small></button>
+                <button class="suggestion-card" data-prompt="focus"><span>◷</span><strong>Improve my focus</strong><small>Get practical study tips</small></button>
+                <button class="suggestion-card" data-prompt="motivate"><span>✦</span><strong>Find motivation</strong><small>Choose a small next step</small></button>
+              </div>
+              <div class="assistant-response hidden" id="assistantResponse" aria-live="polite"></div>
+            </section>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- TASK DIALOG -->
+  <dialog id="taskDialog" class="app-dialog">
+    <form id="taskForm" class="dialog-form">
+      <div class="dialog-heading"><div><div class="eyebrow">MAKE A PLAN</div><h2>Add a task</h2></div><button type="button" class="icon-button" id="closeTaskDialog" aria-label="Close">✕</button></div>
+      <label>Task title<input name="title" required maxlength="120" placeholder="e.g. Practise binary search"></label>
+      <div class="form-row">
+        <label>Subject<select name="subject"><option>Programming</option><option>Mathematics</option><option>Data Structures</option><option>Database Systems</option><option>Computer Networks</option><option>Other</option></select></label>
+        <label>Priority<select name="priority"><option value="Medium">Medium</option><option value="High">High</option><option value="Low">Low</option></select></label>
+      </div>
+      <label>Due date<input name="dueDate" id="taskDueDate" type="date" required></label>
+      <div class="form-actions"><button type="button" class="secondary-button" id="cancelTaskBtn">Cancel</button><button type="submit" class="primary-button">Save task</button></div>
+    </form>
+  </dialog>
+
+  <!-- PROFILE DIALOG -->
+  <dialog id="profileDialog" class="app-dialog">
+    <form id="profileForm" class="dialog-form">
+      <div class="dialog-heading"><div><div class="eyebrow">MAKE IT YOURS</div><h2>Your profile</h2></div><button type="button" class="icon-button" id="closeProfileDialog" aria-label="Close">✕</button></div>
+      <label>Your display name<input name="name" required maxlength="40" placeholder="Enter your name"></label>
+      <label>Your course<input name="course" maxlength="80" placeholder="e.g. B.Tech Information Technology"></label>
+      <div class="form-actions"><button type="button" class="secondary-button" id="cancelProfileBtn">Cancel</button><button type="submit" class="primary-button">Save profile</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
